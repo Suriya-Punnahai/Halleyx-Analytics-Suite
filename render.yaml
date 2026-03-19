@@ -23,7 +23,4 @@ services:
     rootDir: frontend
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: halleyx-backend
-          property: host
+        value: https://halleyx-backend.onrender.com
