@@ -23,7 +23,8 @@ const CustomerOrderPage = () => {
 
   const fetchOrders = () => {
     setLoading(true);
-    axios.get('http://localhost:8080/api/orders')
+    const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+    axios.get(`${API_BASE}/api/orders`)
       .then(res => setOrders(res.data))
       .catch(console.error)
       .finally(() => setLoading(false));

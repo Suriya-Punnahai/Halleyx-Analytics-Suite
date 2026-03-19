@@ -25,9 +25,10 @@ const DashboardConfigurator = () => {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
+    const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080';
     Promise.all([
-      axios.get('http://localhost:8080/api/dashboard').catch(() => ({ data: {} })),
-      axios.get('http://localhost:8080/api/orders').catch(() => ({ data: [] })),
+      axios.get(`${API_BASE}/api/dashboard`).catch(() => ({ data: {} })),
+      axios.get(`${API_BASE}/api/orders`).catch(() => ({ data: [] })),
     ]).then(([dashRes, ordersRes]) => {
       const data = dashRes.data;
       setWidgets(data?.widgets || []);
@@ -38,7 +39,8 @@ const DashboardConfigurator = () => {
 
   const handleSave = () => {
     setSaving(true);
-    axios.post('http://localhost:8080/api/dashboard', { layoutConfig: '[]', widgets })
+    const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+    axios.post(`${API_BASE}/api/dashboard`, { layoutConfig: '[]', widgets })
       .then(() => navigate('/'))
       .catch(() => alert('Failed to save configuration'))
       .finally(() => setSaving(false));

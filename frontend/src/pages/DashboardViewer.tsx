@@ -20,9 +20,10 @@ const DashboardViewer = () => {
     if (!quiet) setLoading(true);
     else setRefreshing(true);
 
+    const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080';
     Promise.all([
-      axios.get('http://localhost:8080/api/dashboard'),
-      axios.get('http://localhost:8080/api/orders'),
+      axios.get(`${API_BASE}/api/dashboard`),
+      axios.get(`${API_BASE}/api/orders`),
     ])
       .then(([dashRes, ordersRes]) => {
         const data = dashRes.data;

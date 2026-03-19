@@ -1,0 +1,29 @@
+services:
+  # Backend Web Service (Docker)
+  - type: web
+    name: halleyx-backend
+    runtime: docker
+    plan: free
+    region: singapore
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+    rootDir: backend
+
+  # Frontend Static Site
+  - type: static
+    name: halleyx-frontend
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm install && npm run build
+    staticPublishDir: dist
+    rootDir: frontend
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: halleyx-backend
+          property: host
