@@ -12,8 +12,8 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**") // Apply to all API endpoints
-                        .allowedOrigins("https://halleyx-analytics-suite.vercel.app") // Vercel frontend URL
+                registry.addMapping("/**")
+                        .allowedOriginPatterns("https://*.vercel.app", "http://localhost:[*]")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
