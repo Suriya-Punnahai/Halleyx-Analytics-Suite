@@ -1,0 +1,4 @@
+src/App.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/ChartWidgets.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/ChartWidgets.tsx(112,24): error TS6133: 'entry' is declared but its value is never read.
+src/components/WidgetConfigSidePanel.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
