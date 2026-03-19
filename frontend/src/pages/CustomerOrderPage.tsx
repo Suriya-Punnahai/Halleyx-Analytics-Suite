@@ -35,7 +35,8 @@ const CustomerOrderPage = () => {
   const handleDelete = (id: number) => {
     if (!window.confirm('Delete this order? This cannot be undone.')) return;
     setDeleting(id);
-    axios.delete(`http://localhost:8080/api/orders/${id}`)
+    const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+    axios.delete(`${API_BASE}/api/orders/${id}`)
       .then(fetchOrders)
       .finally(() => setDeleting(null));
   };
@@ -60,9 +61,10 @@ const CustomerOrderPage = () => {
         onClose={() => setIsModalOpen(false)}
         initialData={editingOrder}
         onSubmit={(data: any) => {
+          const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080';
           const req = editingOrder
-            ? axios.put(`http://localhost:8080/api/orders/${editingOrder.id}`, data)
-            : axios.post('http://localhost:8080/api/orders', data);
+            ? axios.put(`${API_BASE}/api/orders/${editingOrder.id}`, data)
+            : axios.post(`${API_BASE}/api/orders`, data);
           return req.then(() => { setIsModalOpen(false); fetchOrders(); });
         }}
       />
